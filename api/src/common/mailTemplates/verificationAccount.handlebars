@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #email_body {
+            width: 100%;
+            background-color: white;
+            text-align: center;
+        }
+
+        #verify_button {
+            margin: 0 auto;
+            color: white;
+            background-color: #F89325;
+            text-align: center;
+            border-radius: 100px;
+            font-size: 22px;
+            padding: 2%;
+            font-weight: bold;
+        }
+
+        #link {
+            text-decoration: none;
+        }
+
+        #orange_text {
+            color: #F89325;
+            font-weight: bold;
+        }
+
+        #orange_text,
+        #regular_text {
+            font-size: 20px;
+        }
+
+        #copyright {
+            width: 50%;
+        }
+
+        #contact {
+            width: 50%;
+            text-align: right;
+        }
+
+        #footer {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 3%;
+        }
+
+        #footer>div {
+            flex: 0 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="email_body">
+        <br><br>
+        <span id="regular_text">Hello {{userName}}!</span>
+        <br><br>
+        <span id="regular_text">Your account has been created, now you just need to verify it</span>
+        <br><br>
+        <span id="orange_text">Start your engine!</span>
+        <br><br>
+        <a id="link" target="_blank" href="{{publicSite}}/verifyAccount/{{userId}}">
+            <button id="verify_button">
+                VERIFY ACCOUNT
+            </button>
+        </a>
+    </div>
+</body>
+
+</html>
