@@ -1,7 +1,9 @@
 api/.env
 api/media
-client/.env.local
 api/node_modules
-client/node_modules
+AppBikeSupport/.env
+AppBikeSupport/node_modules
 **/ .DS_Store
 .DS_Store
+admin/node_modules
+admin/.env

@@ -31,9 +31,68 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 const {
+  Allies,
+  AllyRatings,
+  AllySchedules,
+  AllyUsers,
+  AssistImages,
+  Assists,
+  BicycleImages,
+  Bicycles,
   ListsMaster,
+  Maps,
+  MapPoints,
   Users,
+  UserImages
 } = sequelize.models;
+
+//Allies
+Allies.hasMany(AllyUsers, {foreignKey:"ally_id"});
+AllyUsers.belongsTo(Allies, {foreignKey:"ally_id"});
+Users.hasMany(AllyUsers, {foreignKey:"user_id"});
+AllyUsers.belongsTo(Users, {foreignKey:"user_id"});
+
+
+//Assists
+Users.hasOne(Assists, {foreignKey:"user_id"});
+Assists.belongsTo(Users, {foreignKey:"user_id", as: "UserAssist"});
+Bicycles.hasOne(Assists, {foreignKey:"bicycle_id"});
+Assists.belongsTo(Bicycles, {foreignKey:"bicycle_id"});
+Allies.hasOne(Assists, {foreignKey:"ally_id"});
+Assists.belongsTo(Allies, {foreignKey:"ally_id"});
+Users.hasOne(Assists, {foreignKey:"user_tec_id"});
+Assists.belongsTo(Users, {foreignKey:"user_tec_id", as: "TechnicianAssist"});
+ListsMaster.hasOne(Assists, {foreignKey:"status_id"});
+Assists.belongsTo(ListsMaster, {foreignKey:"status_id", as: "StatusAssist"});
+ListsMaster.hasOne(Assists, {foreignKey:"type_id"});
+Assists.belongsTo(ListsMaster, {foreignKey:"type_id", as: "TypeAssist"});
+AllyRatings.hasOne(Assists, {foreignKey:"rating_id"});
+Assists.belongsTo(AllyRatings, {foreignKey:"rating_id"});
+Allies.hasMany(AllyRatings, {foreignKey:"ally_id"});
+AllyRatings.belongsTo(Allies, {foreignKey:"ally_id"});
+Assists.hasMany(AssistImages, {foreignKey:"assist_id"});
+AssistImages.belongsTo(AssistImages, {foreignKey:"assist_id"});
+
+
+//Bicycles
+Users.hasMany(Bicycles, {foreignKey:"user_id"});
+Bicycles.belongsTo(Users, {foreignKey:"user_id"});
+ListsMaster.hasOne(Bicycles, {foreignKey:"material_id"});
+Bicycles.belongsTo(ListsMaster, {foreignKey:"material_id", as: "Material"});
+ListsMaster.hasOne(Bicycles, {foreignKey:"type_id"});
+Bicycles.belongsTo(ListsMaster, {foreignKey:"type_id", as: "Type"});
+ListsMaster.hasOne(Bicycles, {foreignKey:"brakes_type_id"});
+Bicycles.belongsTo(ListsMaster, {foreignKey:"brakes_type_id", as: "Brakes"});
+Bicycles.hasMany(BicycleImages, {foreignKey:"bicycle_id"});
+BicycleImages.belongsTo(Bicycles, {foreignKey:"bicycle_id"});
+
+//Maps
+Maps.hasMany(MapPoints, { foreignKey: "map_id" });
+MapPoints.belongsTo(Maps, { foreignKey: "map_id" });
+
+//Users
+Users.hasMany(UserImages, {foreignKey:"user_id"});
+UserImages.belongsTo(Users, {foreignKey:"user_id"});
 
 module.exports = {
   ...sequelize.models,

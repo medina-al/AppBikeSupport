@@ -2,55 +2,51 @@ const { DataTypes } = require("sequelize");
 //Users
 module.exports = (sequelize) => {
   sequelize.define("Users", {
-    userName: {
+    username: {
       type: DataTypes.STRING(30),
       allowNull: true,
     },
-    firstName: {
-      type: DataTypes.STRING(20),
+    password: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
-    lastName: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    email: {
+    mail: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
+    },
+    names: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    lastnames: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
     },
     bio: {
       type: DataTypes.STRING(300),
       allowNull: true,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    type: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
     },
-    imageURL: {
+    mobile: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    image_url: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    balanceLiquid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    balanceFrozen: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    isEventOrganizer: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    isRetailer: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
+    code: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },{
-    timestamps: false, // Deshabilitar los campos de fecha
+    timestamps: false,
   });
 };
