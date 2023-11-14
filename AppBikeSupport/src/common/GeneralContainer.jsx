@@ -89,9 +89,9 @@ const GeneralContainer = ({ children, navigation, title, icon, containerStyles, 
                             <Icon name={"group"} size={50} color={title == "Biciusuarios" ? theme.colors.white : theme.colors.orange} />
                         </Pressable>
                     </View>
-                    <View style={title == "Inicio" ? styles.iconContainerActive : styles.iconContainerInactive}>
+                    <View style={title.startsWith("Inicio") ? styles.iconContainerActive : styles.iconContainerInactive}>
                         <Pressable onPress={() => { navigate('/') }}>
-                            <Icon name={"home-filled"} size={50} color={title == "Inicio" ? theme.colors.white : theme.colors.orange} />
+                            <Icon name={"home-filled"} size={50} color={title.startsWith("Inicio") ? theme.colors.white : theme.colors.orange} />
                         </Pressable>
                     </View>
                     <View style={title == "Aliados" ? styles.iconContainerActive : styles.iconContainerInactive}>

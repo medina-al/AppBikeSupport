@@ -16,6 +16,7 @@
     "@mui/material": "^5.10.17",
     "@mui/x-data-grid": "^5.17.17",
     "@mui/x-date-pickers": "^5.0.13",
+    "@react-google-maps/api": "^2.19.2",
     "axios": "^1.2.1",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",

@@ -12,7 +12,7 @@ import StyledIconButtons from "../../common/StyledIconButtons";
 import { AuthContext } from "../../contexts/AuthContext";
 import GeneralContainer from "../../common/GeneralContainer";
 //External libraries
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Slider from '@react-native-community/slider';
 //Custom functions
 import { formatDate } from "../../utils/dates";
@@ -707,6 +707,7 @@ const AssistDetail = () => {
                     <View style={styles.mapContainer}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <MapView
+                                provider={PROVIDER_GOOGLE}
                                 region={mapRegion}
                                 style={styles.map}
                             >

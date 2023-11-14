@@ -1,6 +1,6 @@
 //React & React Native
 import { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, ActivityIndicator, BackHandler, Alert } from "react-native";
+import { View, StyleSheet, ActivityIndicator, BackHandler, StatusBar, Alert } from "react-native";
 import { Routes, Route, useNavigate } from "react-router-native";
 //Expo
 import Constants from 'expo-constants'
@@ -10,16 +10,27 @@ import { getOpenAssists, assignAssist } from "./services/assist";
 import { AuthContext } from "./contexts/AuthContext";
 //Session
 import Login from "./components/session/Login";
-import CreateAccount from "./components/user/manage/CreateAccount";
+import AccountCreate from "./components/user/manage/AccountCreate";
 //Home
 import Home from "./Home"; 
+//Allies
+import HomeAllies from "./components/allies/HomeAllies";
+import AllyDetail from "./components/allies/AllyDetail";
 //Assists
 import HomeAssists from "./components/assist/HomeAssists";
 import CreateAssists from "./components/assist/CreateAssists";
 import AssistDetail from "./components/assist/AssistDetail";
 import ChatAssist from "./components/assist/ChatAssist";
+//Recommendations
+import HomeRecommendations from "./components/recommendations/HomeRecommendations";
 //User Profile
+import AccountEdit from "./components/user/manage/AccountEdit";
 import Profile from "./components/user/Profile";
+import Cyclist from "./components/user/Cyclist";
+import CyclistDetail from "./components/user/CyclistDetail";
+import BicycleDetail from "./components/user/BicycleDetail";
+import BicycleCreate from "./components/user/BicycleCreate";
+import BicycleEdit from "./components/user/BicycleEdit";
 
 const Main = () => {
     const navigate = useNavigate();
@@ -36,6 +47,7 @@ const Main = () => {
     };
 
     useEffect(() => {
+        console.log(Constants.statusBarHeight);
         BackHandler.addEventListener('hardwareBackPress', handleBackPress);
         return () => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
@@ -98,7 +110,7 @@ const Main = () => {
     //Custom styles
     const styles = StyleSheet.create({
         container: {
-            marginTop: Constants.statusBarHeight,
+            marginTop: 8,
             flexGrow: 1,
         },
         loading: {
@@ -123,13 +135,25 @@ const Main = () => {
                     <Route path="/" element={<Home />} /> :
                     <Route path="/" element={<Login />} />
                 }
+                
+                <Route path="/aliados" element={<HomeAllies />} />
+                <Route path="/detalleAliado" element={<AllyDetail />} />
+                
                 <Route path="/asistencias" element={<HomeAssists />} />
                 <Route path="/crearAsistencia" element={<CreateAssists />} />
                 <Route path="/detalleAsistencia/:assistId" element={<AssistDetail />} />
                 <Route path="/chatAsistencia/:assistId" element={<ChatAssist />} />
 
-                <Route path="/crearCuenta" element={<CreateAccount />} />
+                <Route path="/crearCuenta" element={<AccountCreate />} />
+                <Route path="/editarCuenta" element={<AccountEdit />} />
                 <Route path="/perfil" element={<Profile />} />
+                <Route path="/biciusuarios" element={<Cyclist />} />
+                <Route path="/detalleBiciusuario/:userId" element={<CyclistDetail />} />
+                <Route path="/detalleBicicleta" element={<BicycleDetail />} />
+                <Route path="/crearBicicleta" element={<BicycleCreate />} />
+                <Route path="/editarBicicleta" element={<BicycleEdit />} />
+
+                <Route path="/recomendaciones" element={<HomeRecommendations />} />
             </Routes>
         </View>
     );

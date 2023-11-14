@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      front_groupser: {
+      front_groupset: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -40,8 +40,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      status: {
-        type: DataTypes.STRING,
+      public: {
+        type: DataTypes.BOOLEAN,
         allowNull: true,
       }
     },

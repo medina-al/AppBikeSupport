@@ -34,6 +34,8 @@ const {
   Allies,
   AllyRatings,
   AllySchedules,
+  AllyServices,
+  AllyImages,
   AllyUsers,
   AssistImages,
   Assists,
@@ -42,6 +44,8 @@ const {
   ListsMaster,
   Maps,
   MapPoints,
+  Recommendations,
+  RecommendationMedias,
   Users,
   UserImages
 } = sequelize.models;
@@ -51,7 +55,15 @@ Allies.hasMany(AllyUsers, {foreignKey:"ally_id"});
 AllyUsers.belongsTo(Allies, {foreignKey:"ally_id"});
 Users.hasMany(AllyUsers, {foreignKey:"user_id"});
 AllyUsers.belongsTo(Users, {foreignKey:"user_id"});
+Allies.hasMany(AllySchedules, {foreignKey:"ally_id"});
+AllySchedules.belongsTo(Allies, {foreignKey:"ally_id"});
+Allies.hasMany(AllyServices, {foreignKey:"ally_id"});
+AllyServices.belongsTo(Allies, {foreignKey:"ally_id"});
+Allies.hasMany(AllyImages, {foreignKey:"ally_id"});
+AllyImages.belongsTo(Allies, {foreignKey:"ally_id"});
 
+ListsMaster.hasOne(AllySchedules, {foreignKey:"day_id"});
+AllySchedules.belongsTo(ListsMaster, {foreignKey:"day_id"});
 
 //Assists
 Users.hasOne(Assists, {foreignKey:"user_id"});
@@ -93,6 +105,10 @@ MapPoints.belongsTo(Maps, { foreignKey: "map_id" });
 //Users
 Users.hasMany(UserImages, {foreignKey:"user_id"});
 UserImages.belongsTo(Users, {foreignKey:"user_id"});
+
+//Recommendations
+Recommendations.hasMany(RecommendationMedias, {foreignKey:"rec_id"});
+RecommendationMedias.belongsTo(Recommendations, {foreignKey:"rec_id"});
 
 module.exports = {
   ...sequelize.models,

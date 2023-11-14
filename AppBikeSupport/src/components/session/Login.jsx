@@ -1,6 +1,6 @@
 //React and React Native
 import { useState, useContext } from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet, Alert, Image } from "react-native";
 import { useNavigate } from "react-router-native";
 //Custom components
 import StyledTexts from "../../common/StyledTexts";
@@ -12,8 +12,8 @@ import GeneralContainer from "../../common/GeneralContainer";
 import { validateStringLength } from "../../utils/stringValidations";
 //Services
 import { login } from "../../services/sessions";
-//Custom styles
-import theme from "../../common/styles/theme";
+//
+import loginImage from '../../../assets/loginImage.png';
 
 const styles = StyleSheet.create({
     input: {
@@ -83,13 +83,14 @@ const Login = () => {
         }
     };
     return (
-        <GeneralContainer>
+        <GeneralContainer containerStyles={{justifyContent: "flex-start", paddingTop: 50}}>
+            <Image source={loginImage} style={{ width: "80%", height: 200, marginBottom: 50 }} />
             <StyledTexts
                 color={"white"}
                 fontSize={"bigger"}
                 fontWeight={"bolder"}
                 style={styles.title}>
-                Bienvenido
+                Inicia sesión
             </StyledTexts>
             <StyledTexts
                 color={"white"}

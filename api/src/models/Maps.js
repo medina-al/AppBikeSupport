@@ -17,9 +17,12 @@ module.exports = (sequelize) => {
     marker_icon: {
       type: DataTypes.STRING(20),
       allowNull: true,
-      defaultValue: "ACTIVO"
     },
-    
+    status: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+      defaultValue: 'ACTIVO'
+    },    
   },{
     timestamps: false,
   });

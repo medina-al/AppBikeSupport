@@ -12,8 +12,7 @@ import {
     tableContainer,
     tableGrid,
 } from "../shared/styles/MUIStyles";
-import CarImage from "./CarImage";
-import CarActions from "./CarActions";
+//import CarImage from "./CarImage";
 import { GeneralContext } from "../../context/GeneralContext";
 import "../shared/styles/GeneralStyles.css";
 import { formatDate } from "../../utils/dates";
@@ -106,7 +105,7 @@ function Assists() {
         },
         {
             field: "status",
-            headerName: "State",
+            headerName: "Estado",
             minWidth: 200,
             flex: 1,
             headerClassName: "super-app-theme--header",
@@ -170,20 +169,8 @@ function Assists() {
     return (
         <Box>
             <Box sx={moduleTitleBox}>
-                <Box sx={moduleTitle}>Assists</Box>
+                <Box sx={moduleTitle}>Asistencias</Box>
                 <Box sx={fullBox}>
-                    <Tooltip title="Create Car">
-                        <IconButton
-                            color="primary"
-                            aria-label="Create Car"
-                            component="label"
-                            onClick={() =>
-                                handleOpen("Create Car", "../components/Cars/CarCreate")
-                            }
-                        >
-                            <Icon sx={bigButtonWhite}>add_circle</Icon>
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip title="Refresh data">
                         <IconButton
                             color="primary"

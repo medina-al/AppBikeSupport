@@ -10,7 +10,7 @@ export default {
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -37,6 +37,9 @@ export default {
       STORAGE_BUCKET: process.env.STORAGE_BUCKET,
       MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
       APP_ID: process.env.APP_ID,
+      "eas": {
+        "projectId": "dbc9447c-1292-4671-b2be-2ebe13c8c6ac"
+      }
     }
   }
 }

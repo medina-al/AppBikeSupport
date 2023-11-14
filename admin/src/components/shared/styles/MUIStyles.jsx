@@ -63,6 +63,10 @@ export const bigButtonWhite = {
   color: "primary.light",
   fontSize: "30px",
 };
+export const bigButtonOrange = {
+  color: redFF,
+  fontSize: "50px",
+};
 
 export const tableContainer = {
   width: 1,

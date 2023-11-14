@@ -1,5 +1,5 @@
 //Custom code
-const { Users, Bicycles } = require("../db.js");
+const { Users, Bicycles, BicycleImages } = require("../db.js");
 const { createToken, verifyJWTToken } = require("../common/sessionToken");
 const { conn } = require("../db.js");
 const response = require("../common/response.js");
@@ -25,7 +25,12 @@ async function login(req) {
           [Op.in]: ['ACTIVO', 'PENDIENTE']
         }
       },
-      include: [Bicycles]
+      include: [
+        {
+          model: Bicycles,
+          include: [BicycleImages]
+        }
+      ]
     });
 
     if (user === null)

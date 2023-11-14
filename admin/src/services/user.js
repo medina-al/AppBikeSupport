@@ -22,3 +22,13 @@ export async function loginUser(body){
       return error;
     }   
 }
+
+//Get all users
+export async function getUsers(){
+  try {
+      const { data } = await axios.get(`/users?type=BICIUSUARIO&status=ACTIVO`);
+      return data;
+  } catch (error) {
+    return error;
+  }   
+}

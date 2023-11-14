@@ -94,9 +94,11 @@ export function GeneralContextProvider(props) {
       )}
       <Dialog
         fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth={"xl"}
         open={open}
         onClose={handleClose}
-        transitionDuration={{ enter: 1500, exit: 2200 }}
+        transitionDuration={{ enter: 1000, exit: 1000 }}
         sx={dialogGeneral}
       >
         <DialogTitle id="responsive-dialog-title" sx={dialogTitleStyle}>
@@ -111,7 +113,7 @@ export function GeneralContextProvider(props) {
         </DialogContent>
         <DialogActions sx={dialogFooter}>
           <Button variant="contained" color="primary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
         </DialogActions>
       </Dialog>

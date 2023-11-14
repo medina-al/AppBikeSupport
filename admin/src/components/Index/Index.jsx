@@ -17,11 +17,12 @@ function Index() {
     return <></>;
   }
   return (
-    <Box height="80vh" display="flex" sx={{padding: '3%', backgroundColor: grayFFTr, borderRadius: "15px"}}>
+    <Box display="flex" sx={{padding: '3%', backgroundColor: grayFFTr, borderRadius: "15px"}}>
        <img
-          className="w-50 mx-auto"
+          className="mx-auto"
           src="/logo_texto.png"
           alt="App Bike Support Logo"
+          style={{width: "50%"}}
         />
     </Box>
   );

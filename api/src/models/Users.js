@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     bio: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.STRING(700),
       allowNull: true,
     },
     type: {
@@ -44,6 +44,10 @@ module.exports = (sequelize) => {
     },
     code: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    public: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     }
   },{

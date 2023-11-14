@@ -1,7 +1,7 @@
 //React
 import { useContext, useEffect, useState } from "react";
 //React Native
-import { ScrollView, StyleSheet, View, Pressable } from 'react-native';
+import { ScrollView, StyleSheet, View, Pressable, RefreshControl } from 'react-native';
 import { useNavigate } from "react-router-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 //Custom Components
@@ -58,6 +58,7 @@ const HomeAssists = () => {
     const { userInfo } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [assists, setAssists] = useState();
+    const [refreshing, setRefreshing] = useState(false);
 
     //Service function
     const getAssistService = async (userId, userType) => {
@@ -163,12 +164,26 @@ const HomeAssists = () => {
             )
         });
 
+    const handleRefresh = () => {
+        getAssistService(userInfo.id, userInfo.type);
+    }
+
     useEffect(() => {
         getAssistService(userInfo.id, userInfo.type);
     }, []);
     return (
         <GeneralContainer navigation={true} title="Asistencias" icon="support-agent" loading={loading}>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView
+                style={styles.scrollView}
+                refreshControl={ // Agregar el componente RefreshControl
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={handleRefresh}
+                        tintColor={theme.colors.orange} // Cambia el color de la animación de recarga
+                        colors={[theme.colors.white, theme.colors.yellow]} // Cambia los colores de la animación de recarga
+                        progressBackgroundColor={theme.colors.orange}
+                    />
+                }>
                 <Pressable onPress={() => { navigate('/crearAsistencia') }}>
                     <View style={[styles.assistCard, { justifyContent: "center", alignItems: "center", padding: 10, paddingBottom: 10 }]}>
                         <Icon name="add-circle" size={40} color={theme.colors.white} />

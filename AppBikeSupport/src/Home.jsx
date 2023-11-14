@@ -11,7 +11,7 @@ import StyledInputs from "./common/StyledInputs";
 import { AuthContext } from "./contexts/AuthContext";
 import GeneralContainer from "./common/GeneralContainer";
 //External libraries
-import MapView, { Marker, Callout } from 'react-native-maps';
+import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from "expo-location";
 //Services
 import { verifyAccount } from "./services/users";
@@ -49,22 +49,24 @@ const styles = StyleSheet.create({
         right: 10
     },
     markerCallout:{
+        wdith: 200
     }
 });
 
 const Home = () => {
     const { updateUser, userInfo } = useContext(AuthContext);
-    console.log("User Info!!!!!!!!!!!!!!!!!!!!!!!!!!!",userInfo);
+    //console.log("User Info!!!!!!!!!!!!!!!!!!!!!!!!!!!",userInfo);
     const [modalVisible, setModalVisible] = useState(false);
     const [mapRegion, setMapRegion] = useState({
         latitude: 4.628619,
         longitude: -74.065040,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01
+        latitudeDelta: 0.8,
+        longitudeDelta: 0.8
     });
     const [markers, setMarkers] = useState();
     const [layers, setLayers] = useState({});
     const [activeLayer, setActiveLayer] = useState(1);
+    const [currentLayer, setCurrentLayer] = useState("");
 
     //Form values
     const [code, setCode] = useState('');
@@ -80,8 +82,8 @@ const Home = () => {
         setMapRegion({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2
         })
         console.log("Coordenadas//////////////////",location.coords.latitude, location.coords.longitude);
     }
@@ -108,12 +110,15 @@ const Home = () => {
         setActiveLayer(id)
         const response = await getMaps(id);
         if (response.success) {
+            setCurrentLayer(response.data[0].name);
             const mapPoints = response.data[0].MapPoints;
             const formattedPoints = [];
             mapPoints.map((point) => {
                 formattedPoints.push({
                     title: point.title,
                     description: point.description,
+                    schedule: point.schedule,
+                    icon: response.data[0].marker_icon,
                     coordinate: {
                         latitude: point.latitude,
                         longitude: point.longitude,
@@ -124,7 +129,7 @@ const Home = () => {
         }
     }
 
-    const CustomMarker = ({ title, description, imageSource }) => {
+    const CustomMarker = ({ title, description,schedule }) => {
         return (
             <View style={styles.markerCallout}>
                 <StyledTexts fontSize={"big"} color={"orange"}>
@@ -132,6 +137,9 @@ const Home = () => {
                 </StyledTexts>
                 <StyledTexts style={{textAlign: "justify"}}>
                     {description}
+                </StyledTexts>
+                <StyledTexts style={{textAlign: "justify"}}>
+                    {schedule}
                 </StyledTexts>
             </View>
         );
@@ -227,8 +235,9 @@ const Home = () => {
                     </View>
                 </View>
             </Modal>
-            <GeneralContainer navigation={true} title="Inicio" icon="home-filled" containerStyles={{ padding: 0 }}>
+            <GeneralContainer navigation={true} title={"Inicio - "+currentLayer} icon="home-filled" containerStyles={{ padding: 0 }}>
                 <MapView
+                    provider={PROVIDER_GOOGLE}
                     region={mapRegion}
                     onRegionChange={this.onRegionChange}
                     style={styles.map}
@@ -239,7 +248,8 @@ const Home = () => {
                             key={index}
                             coordinate={marker.coordinate}
                         >
-                            <Callout>
+                            <Icon name={marker.icon} size={30} color={theme.colors.orange} />
+                            <Callout style={{width: 300}}>
                                 <CustomMarker {...marker} />
                             </Callout>
                         </Marker>

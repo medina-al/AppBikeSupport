@@ -1,13 +1,13 @@
 //React and React Native
-import { useState, useContext } from "react";
-import { StyleSheet, ScrollView, Alert, Image } from "react-native";
+import { useState } from "react";
+import { StyleSheet, ScrollView, Alert, Image, View } from "react-native";
 import { useNavigate } from "react-router-native";
 import * as ImagePicker from 'expo-image-picker';
+import { Picker } from '@react-native-picker/picker';
 //Custom components
 import StyledTexts from "../../../common/StyledTexts";
 import StyledInputs from "../../../common/StyledInputs";
 import StyledButtons from "../../../common/StyledButtons";
-import { AuthContext } from "../../../contexts/AuthContext";
 import GeneralContainer from "../../../common/GeneralContainer";
 //Custom functions
 import { validateStringLength, validateEmail } from "../../../utils/stringValidations";
@@ -17,7 +17,7 @@ import { createAccount } from "../../../services/users";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth } from "../../../../config/firebase";
 //Custom styles
-
+import theme from "../../../common/styles/theme";
 const styles = StyleSheet.create({
     input: {
         width: "100%"
@@ -39,11 +39,17 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'white'
     },
+    picker: {
+        backgroundColor: theme.colors.whiteTransparent50,
+        padding: 1,
+        borderRadius: 30,
+        width: "100%"
+
+    },
 });
 
-const CreateAccount = () => {
+const AccountCreate = () => {
     const navigate = useNavigate();
-    const { loginUser } = useContext(AuthContext)
     //Form values
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -54,6 +60,7 @@ const CreateAccount = () => {
     const [bio, setBio] = useState('');
     const [mobile, setMobile] = useState('');
     const [image, setImage] = useState(null);
+    const [publicAccount, setPublicAccount] = useState(2);
     //Error variables
     const [errorUsername, setErrorUsername] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
@@ -61,7 +68,9 @@ const CreateAccount = () => {
     const [errorMail, setErrorMail] = useState('');
     const [errorNames, setErrorNames] = useState('');
     const [errorLastnames, setErrorLastnames] = useState('');
+    const [errorPublicAccount, setErrorPublicAccount] = useState('');
 
+    const [loading, setLoading] = useState(false);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -77,6 +86,7 @@ const CreateAccount = () => {
     };
 
     const handleSubmit = async () => {
+        setLoading(true);
         //Validations
         if (username == '') {
             setErrorUsername("Este campo es obligatorio");
@@ -106,6 +116,13 @@ const CreateAccount = () => {
             return;
         } else {
             setErrorLastnames(null);
+        }
+        console.log(publicAccount);
+        if (publicAccount == 2) {
+            setErrorPublicAccount("Este campo es obligatorio");
+            return;
+        } else {
+            setErrorPublicAccount(null);
         }
         if (password == '') {
             setErrorPassword("Este campo es obligatorio");
@@ -153,9 +170,12 @@ const CreateAccount = () => {
         body.append("names", names);
         body.append("lastnames", lastnames);
         body.append("bio", bio);
+        body.append("public", publicAccount);
         body.append("mobile", mobile);
         const response = await createAccount(body);
+        console.log(response);
         if (response.success) {
+            setLoading(false);
             createUserWithEmailAndPassword(getAuth(), mail, password).then(() => {
                 Alert.alert(
                     'Éxito',
@@ -170,6 +190,7 @@ const CreateAccount = () => {
                     ]
                 );
             }).catch((err) => {
+                setLoading(false);
                 Alert.alert(
                     'Error',
                     err.message,
@@ -184,6 +205,7 @@ const CreateAccount = () => {
                 );
             });
         } else {
+            setLoading(false);
             let errorMessage;
             if (response.response.status == 500) {
                 errorMessage = 'Hubo un error, intenta nuevamente por favor.';
@@ -205,7 +227,7 @@ const CreateAccount = () => {
         }
     };
     return (
-        <GeneralContainer>
+        <GeneralContainer loading={loading}>
             <ScrollView contentContainerStyle={styles.scrollContent} style={{ width: "100%" }}>
                 <StyledTexts
                     color={"white"}
@@ -311,6 +333,30 @@ const CreateAccount = () => {
                 <StyledTexts
                     color={"white"}
                     alignSelf={"flex-start"}>
+                    Tipo de perfil *
+                </StyledTexts>
+                <View style={{ borderRadius: 10, width: "100%", overflow: "hidden", margin: 10 }}>
+                    <Picker
+                        selectedValue={publicAccount}
+                        onValueChange={(itemValue) => {setPublicAccount(itemValue);}}
+                        style={styles.picker}
+                    >
+                        <Picker.Item label={"Seleccionar"} value={2} color="grey" />
+                        <Picker.Item label={"PÚBLICO"} value={1} />
+                        <Picker.Item label={"PRIVADO"} value={0} />
+                    </Picker>
+                </View>
+                {errorPublicAccount && (
+                    <StyledTexts
+                        color={"red"}
+                        fontSize={"small"}
+                        alignSelf={"flex-start"}>
+                        {errorPublicAccount}
+                    </StyledTexts>
+                )}
+                <StyledTexts
+                    color={"white"}
+                    alignSelf={"flex-start"}>
                     Contraseña *
                 </StyledTexts>
                 <StyledInputs
@@ -355,4 +401,4 @@ const CreateAccount = () => {
     );
 }
 
-export default CreateAccount;
+export default AccountCreate;

@@ -6,7 +6,7 @@ const apiBaseUrl = REACT_APP_API;
 export async function getMaps(id) {
     console.log("Get Masps services: ",apiBaseUrl);
   try {
-    const url = (id)?`${apiBaseUrl}maps/${id}`:`${apiBaseUrl}maps/`;
+    const url = (id)?`${apiBaseUrl}maps/${id}`:`${apiBaseUrl}maps?status=ACTIVO`;
     const { data } = await axios.get(url);
     return data;
   } catch (error) {

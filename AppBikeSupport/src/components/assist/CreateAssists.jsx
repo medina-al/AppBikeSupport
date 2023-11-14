@@ -14,7 +14,7 @@ import StyledInputs from "../../common/StyledInputs";
 import { AuthContext } from "../../contexts/AuthContext";
 import GeneralContainer from "../../common/GeneralContainer";
 //External libraries
-import MapView, { Marker, Callout } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from "expo-location";
 //Custom functions
 import { formatDate } from "../../utils/dates";
@@ -87,14 +87,8 @@ const CreateAssists = () => {
         });
 
         if (!results.canceled) {
-            // Filtra para asegurarte de que no se seleccionen más de 5 imágenes
             const selectedImages = results.assets.slice(0, 5);
-
-            // Almacena las rutas de las imágenes seleccionadas en un arreglo
             const selectedImageURIs = selectedImages.map((image) => image.uri);
-
-            // Aquí puedes hacer lo que necesites con las rutas de las imágenes
-            // Por ejemplo, puedes guardarlas en el estado o realizar otras operaciones.
             setImages(selectedImageURIs);
         }
     };
@@ -310,6 +304,7 @@ const CreateAssists = () => {
                 </StyledTexts>
                 <View style={styles.mapContainer}>
                     <MapView
+                        provider={PROVIDER_GOOGLE}
                         region={mapRegion}
                         onRegionChange={this.onRegionChange}
                         style={styles.map}

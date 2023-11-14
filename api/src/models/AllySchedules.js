@@ -4,11 +4,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "AllySchedules",
     {
-      openTime: {
+      open_time: {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      closeTime: {
+      close_time: {
         type: DataTypes.DATE,
         allowNull: true,
       },
