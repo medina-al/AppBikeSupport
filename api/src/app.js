@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const routes = require("./routes/index.js");
+const cors = require('cors');
 
 require("./db.js");
 
@@ -11,6 +12,7 @@ const server = express();
 server.name = "API";
 
 //Get requests
+server.use(cors());
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json({ limit: "100mb" }));

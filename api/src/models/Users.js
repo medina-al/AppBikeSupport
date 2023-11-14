@@ -2,55 +2,55 @@ const { DataTypes } = require("sequelize");
 //Users
 module.exports = (sequelize) => {
   sequelize.define("Users", {
-    userName: {
+    username: {
       type: DataTypes.STRING(30),
-      allowNull: true,
-    },
-    firstName: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    lastName: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    email: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    bio: {
-      type: DataTypes.STRING(300),
       allowNull: true,
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    imageURL: {
+    mail: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    names: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    lastnames: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    bio: {
+      type: DataTypes.STRING(700),
+      allowNull: true,
+    },
+    type: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    mobile: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    image_url: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    balanceLiquid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
+    code: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-    balanceFrozen: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    isEventOrganizer: {
+    public: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    isRetailer: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
+      allowNull: true,
+    }
   },{
-    timestamps: false, // Deshabilitar los campos de fecha
+    timestamps: false,
   });
 };

@@ -1,0 +1,47 @@
+{
+  "cli": {
+    "version": ">= 5.7.0"
+  },
+  "build": {
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      }
+    },
+    "preview": {
+      "env": {
+        "REACT_APP_API": "http://192.168.0.3:3000/api/",
+        "API_KEY": "AIzaSyBwEQUVyKx_swTI0cFDy9UHF2HQYVLfqlA",
+        "AUTH_DOMAIN": "app-bike-support.firebaseapp.com",
+        "PROJECT_ID": "app-bike-support",
+        "STORAGE_BUCKET": "app-bike-support.appspot.com",
+        "MESSAGING_SENDER_ID": "599418021159",
+        "APP_ID": "1:599418021159:web:afdc81dd10551cd18ab502"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "env": {
+        "REACT_APP_API": "http://192.168.0.3:3000/api/",
+        "API_KEY": "AIzaSyBwEQUVyKx_swTI0cFDy9UHF2HQYVLfqlA",
+        "AUTH_DOMAIN": "app-bike-support.firebaseapp.com",
+        "PROJECT_ID": "app-bike-support",
+        "STORAGE_BUCKET": "app-bike-support.appspot.com",
+        "MESSAGING_SENDER_ID": "599418021159",
+        "APP_ID": "1:599418021159:web:afdc81dd10551cd18ab502"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

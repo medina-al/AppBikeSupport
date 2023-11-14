@@ -7,35 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #email_body {
+        #logo_container {
             width: 100%;
-            background-color: white;
-            text-align: center;
+            background-color: black;   
         }
 
-        #verify_button {
-            margin: 0 auto;
-            color: white;
-            background-color: #F89325;
+        #logo_img {
+            width: 70px;
+        }
+
+        #banner_img {
+            width: 100%;
+        }
+        
+        #email_body {
+            width: 100%;
             text-align: center;
-            border-radius: 100px;
-            font-size: 22px;
-            padding: 2%;
-            font-weight: bold;
+            margin: 0 auto;
         }
 
         #link {
             text-decoration: none;
         }
 
-        #orange_text {
+        .orange_text {
             color: #F89325;
             font-weight: bold;
         }
 
-        #orange_text,
-        #regular_text {
-            font-size: 20px;
+        .orange_text,.regular_text {
+            font-size: 14px;
+        }
+
+        .small_text {
+            font-size: 12px
         }
 
         #copyright {
@@ -48,33 +53,68 @@
         }
 
         #footer {
+            width: 100%;
             background-color: black;
             color: white;
             display: flex;
             justify-content: space-between;
-            padding: 3%;
+            padding: 1%;
+            margin: 0 auto;
         }
 
         #footer>div {
             flex: 0 0 auto;
+            font-size: 8px;
+        }
+
+        @media (min-width: 769px) {
+            #footer {
+                width: 60%;
+            }
+
+            #email_body {
+                width: 60%;
+            }
+        }
+
+        #verify_button {
+            margin: 0 auto;
+            color: white;
+            background-color: #F89325;
+            text-align: center;
+            border-radius: 100px;
+            font-size: 18px;
+            padding: 3%;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
     <div id="email_body">
+        <div id="logo_container">
+            <img id="logo_img" src="https://app.garageid.com/api/media/leo/logo.png" alt="GID Logo">
+        </div>
+        <img id="banner_img" src="https://app.garageid.com/api/media/leo/banner.jpg" alt="GID New account">
+        <br>
+        <span class="regular_text">¡Hola {{username}}!</span>
         <br><br>
-        <span id="regular_text">Hello {{userName}}!</span>
+        <span class="regular_text">¡Cuenta creada! Hora de verificarla</span>
         <br><br>
-        <span id="regular_text">Your account has been created, now you just need to verify it</span>
+        <span class="orange_text">Ve a la aplicación y la primera vez que inicies sesión se te pedirá este código</span>
         <br><br>
-        <span id="orange_text">Start your engine!</span>
+        <span class="orange_text">Código: {{code}}</span>
         <br><br>
-        <a id="link" target="_blank" href="{{publicSite}}/verifyAccount/{{userId}}">
-            <button id="verify_button">
-                VERIFY ACCOUNT
-            </button>
-        </a>
+        <span class="regular_text">¡Bienvenido!</span>
+        <br><br>
+    </div>
+    <div id="footer">
+        <div id="copyright">
+            © 2023 Andrés Leonardo Medina
+        </div>
+        <div id="contact">
+            medina-al@javeriana.edu.co
+        </div>
     </div>
 </body>
 
